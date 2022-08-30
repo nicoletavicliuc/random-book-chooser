@@ -1,0 +1,22 @@
+@import './fonts.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  @apply h-full bg-gray-100 font-[MonoLisa];
+}
+
+html * {
+  @apply font-[MonoLisa];
+}
+
+body {
+  @apply h-full;
+}
+
+button {
+  border-radius: unset;
+}
+
