@@ -2,6 +2,9 @@
 import { render } from 'solid-js/web';
 import 'tailwindcss/tailwind.css';
 import './index.css';
-import App from './App';
+import RandomBookChooser from './RandomBookChooser';
 
-render(() => <App />, document.getElementById('root') as HTMLElement);
+render(
+  () => <RandomBookChooser />,
+  document.getElementById('root') as HTMLElement
+);
