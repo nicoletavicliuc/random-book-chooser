@@ -32,9 +32,14 @@ const RandomBookChooser: Component = () => {
   };
 
   const deleteBook = (bookId: string) => {
-    const newTaskList = bookList.filter((book) => book.id !== bookId);
-    setBookList(newTaskList);
+    const newBookList = bookList.filter((book) => book.id !== bookId);
+    setBookList(newBookList);
   };
+
+  // const handleClick = () => {
+  //   const randomBook = Math.floor(Math.random() * bookList.length).toString();
+  //   setBookList(() => randomBook);
+  // };
 
   return (
     <div class="flex-box items-center mt-64 text-center">
@@ -56,7 +61,14 @@ const RandomBookChooser: Component = () => {
         </button>
       </form>
       <div>
-        <h4 class="mb-4">Books</h4>
+        <button
+          class="mb-4"
+          onClick={() =>
+            setBookList(bookList[Math.floor(Math.random() * bookList.length)])
+          }
+        >
+          Choose
+        </button>
         <For each={bookList}>
           {(book: Book) => (
             <div class=" flex flex-row flex-cols-3 mb-3 justify-center">
