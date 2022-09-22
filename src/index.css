@@ -5,11 +5,11 @@
 @tailwind utilities;
 
 html {
-  @apply h-full bg-gray-100 font-[MonoLisa];
+  @apply h-full bg-gray-100 font-[Arial];
 }
 
 html * {
-  @apply font-[MonoLisa];
+  @apply font-[Arial];
 }
 
 body {
@@ -19,4 +19,3 @@ body {
 button {
   border-radius: unset;
 }
-

@@ -1,5 +1,6 @@
 import { Component, For } from 'solid-js';
 import { createStore } from 'solid-js/store';
+import { supabase } from './supabaseClient';
 
 const RandomBookChooser: Component = () => {
   type Book = {
@@ -10,7 +11,6 @@ const RandomBookChooser: Component = () => {
   const [bookList, setBookList] = createStore([] as Book[]);
   const addBook = (e: Event) => {
     e.preventDefault();
-
     const bookInput = document.querySelector('#bookInput') as HTMLInputElement;
 
     const newBook: Book = {
@@ -21,6 +21,21 @@ const RandomBookChooser: Component = () => {
 
     setBookList([newBook, ...bookList]);
     bookInput.value = '';
+
+    const insertBooks = async (): Promise<Book[]> => {
+      const { data, error } = await supabase
+        .from('books')
+        .insert([{ name: newBook.text }]);
+      if (error) {
+        throw error;
+      }
+      return data;
+    };
+
+    insertBooks().then((data) => {
+      setBookList(data);
+      console.log(data);
+    });
   };
 
   const toggleStatus = (bookId: string) => {
@@ -36,10 +51,26 @@ const RandomBookChooser: Component = () => {
     setBookList(newBookList);
   };
 
-  // const handleClick = () => {
-  //   const randomBook = Math.floor(Math.random() * bookList.length).toString();
-  //   setBookList(() => randomBook);
-  // };
+  const handleClick = () => {
+    const randomBook = bookList[Math.floor(Math.random() * bookList.length)];
+    setBookList(() => randomBook);
+  };
+
+  const getBooks = async (): Promise<Book[]> => {
+    const { data: books, error } = await supabase.from('books').select('*');
+
+    if (error) {
+      throw error;
+    }
+    return books;
+  };
+
+  getBooks().then((data) => {
+    setBookList(() => data);
+    console.log(data);
+  });
+
+  console.log(bookList());
 
   return (
     <div class="flex-box items-center mt-64 text-center">
@@ -61,12 +92,7 @@ const RandomBookChooser: Component = () => {
         </button>
       </form>
       <div>
-        <button
-          class="mb-4"
-          onClick={() =>
-            setBookList(bookList[Math.floor(Math.random() * bookList.length)])
-          }
-        >
+        <button class="mb-4" onClick={handleClick}>
           Choose
         </button>
         <For each={bookList}>
@@ -98,47 +124,3 @@ const RandomBookChooser: Component = () => {
   );
 };
 export default RandomBookChooser;
-
-// import { stringify } from 'postcss';
-// import { Component, createSignal, For } from 'solid-js';
-// import BooksList from './BooksList';
-
-// const RandomBookChooser: Component = () => {
-//   const [bookList, setBookList] = createSignal([
-//     { id: 0, title: 'Mere Christianity', author: 'C.S. Lewis', read: true },
-//     { id: 1, title: 'Severe Mercy', author: 'C.S. Lewis', read: false },
-//     {
-//       id: 2,
-//       title: 'Three Philosophies of life',
-//       author: 'Peter Kreeft',
-//       read: true,
-//     },
-//   ]);
-//   const chooseRandomBook = Math.floor(
-//     Math.random() * bookList.length
-//   ).toString();
-
-//   return (
-//     <>
-//       <div class="w-screen h-screen flex flex-col items-center justify-center">
-//         <header class="text-center text-2xl text-black mt-16">
-//           Random Book Chooser
-//         </header>
-//         <button
-//           class="box-content h-6 w-16 p-4 m-6 text-lg text-white bg-purple-400"
-//           onClick={() => chooseRandomBook}
-//         >
-//           Choose
-//         </button>
-//         <div>
-//           {' '}
-//           <For each={bookList()} fallback={<div>Loading...</div>}>
-//             {(book) => <div>{book.title}</div>}
-//           </For>
-//         </div>
-//       </div>
-//     </>
-//   );
-// };
-
-// export default RandomBookChooser;
