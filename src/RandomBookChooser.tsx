@@ -2,7 +2,7 @@ import { Component, For } from 'solid-js';
 import AddBookButton from './AddBookButton';
 import BookList from './BookList';
 import { setBookList, bookList } from './store';
-import { supabase } from './supabaseClient';
+import { supabase } from './api/supabaseClient';
 import { Book } from './type';
 
 const getBooks = async (): Promise<Book[]> => {

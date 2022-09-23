@@ -1,5 +1,5 @@
 import { getBooksFromSupabase } from "./RandomBookChooser";
-import { supabase } from "./supabaseClient";
+import { supabase } from "./api/supabaseClient";
 import { Book } from "./type";
 
 const AddBookButton = () => {
