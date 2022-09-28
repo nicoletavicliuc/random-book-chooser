@@ -1,7 +1,12 @@
-import { For } from 'solid-js';
+import { Component, For } from 'solid-js';
 import { setBookList, bookList } from './store';
+import { Book } from './type';
 
-const BookList = () => {
+interface Props {
+  randomBook: Book;
+}
+
+const BookList: Component<Props> = ({ randomBook }) => {
   const toggleStatus = (bookId: string) => {
     setBookList(
       (book) => book.id === bookId,
@@ -27,9 +32,14 @@ const BookList = () => {
               >
                 X
               </button>
-              <div class={`bg-white p-2 mx-2 ${book.read && 'line-through'}`}>
+              <div
+                class={`bg-white p-2 ${randomBook && 'text-red-500'}mx-2 ${
+                  book.read && 'line-through'
+                }`}
+              >
                 {book.name}
               </div>
+
               <input
                 type="checkbox"
                 checked={book.read}

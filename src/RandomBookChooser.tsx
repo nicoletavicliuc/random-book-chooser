@@ -21,11 +21,13 @@ export const getBooksFromSupabase = () => {
     console.log('Books fetched from Supabase.');
   });
 };
+
 const RandomBookChooser: Component = () => {
-  const handleClick = () => {
-    const choooseRandomBook =
-      bookList[Math.floor(Math.random() * bookList.length)];
-    setBookList(() => choooseRandomBook);
+ 
+  const chooseRandomBook = () => {
+    const randomBook = bookList[Math.floor(Math.random() * bookList.length)];
+    setBookList(() => randomBook);
+    console.log(randomBook);
   };
 
   const addBook: AddBook = (newBook) => {
@@ -45,15 +47,18 @@ const RandomBookChooser: Component = () => {
       getBooksFromSupabase();
     });
   };
+
   return (
     <div class="flex-box items-center mt-64 text-center">
       <h1 class="mb-4 font-bold text-lg">Random Book Chooser</h1>
       <AddBookForm addBook={addBook} />
       <div>
-        <button class="mb-4" onClick={handleClick}>
+        <button class="mb-4" onClick={chooseRandomBook}>
           Choose
         </button>
-        <BookList />
+        <BookList
+          randomBook={bookList[Math.floor(Math.random() * bookList.length)]}
+        />
       </div>
     </div>
   );
