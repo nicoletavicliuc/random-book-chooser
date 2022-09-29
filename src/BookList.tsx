@@ -27,14 +27,14 @@ const BookList: Component<Props> = ({ randomBook }) => {
           return (
             <div class=" flex flex-row flex-cols-3 mb-3 justify-center">
               <button
-                class="btn btn-danger w-auto"
+                class="btn btn-danger w-auto mr-2 text-purple-700"
                 onclick={() => deleteBook(book.id)}
               >
                 X
               </button>
               <div
                 class={`bg-white p-2 ${randomBook && 'text-red-500'}mx-2 ${
-                  book.read && 'line-through'
+                  book.read && 'bg-purple-100'
                 }`}
               >
                 {book.name}
@@ -44,7 +44,7 @@ const BookList: Component<Props> = ({ randomBook }) => {
                 type="checkbox"
                 checked={book.read}
                 role="button"
-                class="h-auto px-3"
+                class="h-auto accent-purple-700 px-6 mx-2"
                 onClick={() => {
                   toggleStatus(book.id);
                 }}

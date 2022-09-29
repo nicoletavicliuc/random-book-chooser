@@ -23,7 +23,6 @@ export const getBooksFromSupabase = () => {
 };
 
 const RandomBookChooser: Component = () => {
- 
   const chooseRandomBook = () => {
     const randomBook = bookList[Math.floor(Math.random() * bookList.length)];
     setBookList(() => randomBook);
@@ -53,7 +52,10 @@ const RandomBookChooser: Component = () => {
       <h1 class="mb-4 font-bold text-lg">Random Book Chooser</h1>
       <AddBookForm addBook={addBook} />
       <div>
-        <button class="mb-4" onClick={chooseRandomBook}>
+        <button
+          class="mb-4 p-2  bg-white outline outline-purple-200 hover:bg-purple-200"
+          onClick={chooseRandomBook}
+        >
           Choose
         </button>
         <BookList
