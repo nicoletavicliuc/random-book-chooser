@@ -1,10 +1,5 @@
 import { Component, For } from 'solid-js';
-import { setBookList, bookList, randomBook } from './store';
-import { Book } from './type';
-
-interface Props {
-  randomBook: Book;
-}
+import { setBookList, bookList, randomBook } from '../store';
 
 const BookList: Component = () => {
   const toggleStatus = (bookId: string) => {

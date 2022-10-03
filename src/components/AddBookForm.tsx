@@ -1,4 +1,4 @@
-import { AddBook } from './type';
+import { AddBook } from '../type';
 import { Component, createSignal } from 'solid-js';
 
 interface Props {

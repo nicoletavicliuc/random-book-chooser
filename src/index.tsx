@@ -2,7 +2,7 @@
 import { render } from 'solid-js/web';
 import 'tailwindcss/tailwind.css';
 import './index.css';
-import RandomBookChooser from './RandomBookChooser';
+import RandomBookChooser from './components/RandomBookChooser';
 
 render(
   () => <RandomBookChooser />,

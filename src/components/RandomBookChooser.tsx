@@ -1,8 +1,8 @@
 import { Component } from 'solid-js';
 import BookList from './BookList';
-import { setBookList, bookList, setRandomBook } from './store';
-import { supabase } from './api/supabaseClient';
-import { AddBook, Book } from './type';
+import { setBookList, bookList, setRandomBook } from '../store';
+import { supabase } from '../api/supabaseClient';
+import { AddBook, Book } from '../type';
 import AddBookForm from './AddBookForm';
 
 const getBooks = async (): Promise<Book[]> => {
