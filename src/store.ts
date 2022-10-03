@@ -4,3 +4,4 @@ import { Book } from './type';
 
 export const [bookList, setBookList] = createStore([] as Book[]);
 export const [value, setValue] = createSignal('');
+export const [randomBook, setRandomBook] = createSignal<Book | null>(null);

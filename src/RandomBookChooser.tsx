@@ -1,7 +1,6 @@
-import { Component, For } from 'solid-js';
-import AddBookButton from './AddBookForm';
+import { Component } from 'solid-js';
 import BookList from './BookList';
-import { setBookList, bookList, setValue } from './store';
+import { setBookList, bookList, setRandomBook } from './store';
 import { supabase } from './api/supabaseClient';
 import { AddBook, Book } from './type';
 import AddBookForm from './AddBookForm';
@@ -24,9 +23,10 @@ export const getBooksFromSupabase = () => {
 
 const RandomBookChooser: Component = () => {
   const chooseRandomBook = () => {
-    const randomBook = bookList[Math.floor(Math.random() * bookList.length)];
-    setBookList(() => randomBook);
-    console.log(randomBook);
+    const randomBookAccent =
+      bookList[Math.floor(Math.random() * bookList.length)];
+    setRandomBook(() => randomBookAccent);
+    console.log(randomBookAccent);
   };
 
   const addBook: AddBook = (newBook) => {
@@ -58,9 +58,7 @@ const RandomBookChooser: Component = () => {
         >
           Choose
         </button>
-        <BookList
-          randomBook={bookList[Math.floor(Math.random() * bookList.length)]}
-        />
+        <BookList />
       </div>
     </div>
   );

@@ -4,3 +4,4 @@ export type Book = {
   read: boolean;
 };
 export type AddBook = (newBook: string) => void;
+

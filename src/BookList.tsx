@@ -1,12 +1,12 @@
 import { Component, For } from 'solid-js';
-import { setBookList, bookList } from './store';
+import { setBookList, bookList, randomBook } from './store';
 import { Book } from './type';
 
 interface Props {
   randomBook: Book;
 }
 
-const BookList: Component<Props> = ({ randomBook }) => {
+const BookList: Component = () => {
   const toggleStatus = (bookId: string) => {
     setBookList(
       (book) => book.id === bookId,
@@ -25,7 +25,7 @@ const BookList: Component<Props> = ({ randomBook }) => {
       <For each={bookList}>
         {(book) => {
           return (
-            <div class=" flex flex-row flex-cols-3 mb-3 justify-center">
+            <div class="flex flex-row flex-cols-3 mb-3 justify-center">
               <button
                 class="btn btn-danger w-auto mr-2 text-purple-700"
                 onclick={() => deleteBook(book.id)}
@@ -33,9 +33,9 @@ const BookList: Component<Props> = ({ randomBook }) => {
                 X
               </button>
               <div
-                class={`bg-white p-2 ${randomBook && 'text-red-500'}mx-2 ${
-                  book.read && 'bg-purple-100'
-                }`}
+                class={`bg-white p-2 ${
+                  randomBook()?.id === book.id && 'bg-green-200'
+                } mx-2 ${book.read && 'bg-purple-100'}`}
               >
                 {book.name}
               </div>
